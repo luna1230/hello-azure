@@ -8,5 +8,5 @@ ENV PORT 4567
 EXPOSE 4567
 COPY --from=BUILD /usr/src/app/target /opt/target
 WORKDIR /opt/target
-
-CMD ["/bin/bash", "-c", "find -type f -name '*-with-dependencies.jar' | xargs java -jar"]
+ENTRYPOINT ["java","-jar","webfrontend-0.1.0.jar"]
+#CMD ["/bin/bash", "-c", "find -type f -name '*-with-dependencies.jar' | xargs java -jar"]
