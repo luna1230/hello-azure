@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: webfound
+spec:
+  template:
+    metadata:
+      labels:
+        app: webfound
+    spec:
+      containers:
+      - image: lbtestdemoacr.azurecr.io/webfrontend:14
+        name: webfound
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        tty: true
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webfound
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webfound
+  type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: webfound
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: webfound.47cab6a688394292b0b9.eastus.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: webfound
+          servicePort: 80
+        path: /

@@ -1,6 +1,6 @@
 [environments]
   [environments.development]
-    name = "webfrontend"
+    name = "hello-azure"
     namespace = "default"
     wait = true
     watch = false
