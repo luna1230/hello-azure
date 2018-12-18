@@ -9,7 +9,7 @@ spec:
         app: webfound
     spec:
       containers:
-      - image: lbtestdemoacr.azurecr.io/webfrontend:14
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: webfound
         resources:
           requests:
