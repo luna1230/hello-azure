@@ -1,12 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: webfound
+  name: webfrontend
 spec:
   template:
     metadata:
       labels:
-        app: webfound
+        app: webfrontend
     spec:
       containers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,25 +25,25 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webfound
+  name: webfrontend
 spec:
   ports:
   - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    app: webfound
+    app: webfrontend
   type: ClusterIP
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: webfound
+  name: webfrontend
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-  - host: webfound.47cab6a688394292b0b9.eastus.aksapp.io
+  - host: webfrontend.47cab6a688394292b0b9.eastus.aksapp.io
     http:
       paths:
       - backend:
