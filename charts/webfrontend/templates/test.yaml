@@ -47,6 +47,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: webfound
+          serviceName: webfrontend
           servicePort: 80
         path: /
